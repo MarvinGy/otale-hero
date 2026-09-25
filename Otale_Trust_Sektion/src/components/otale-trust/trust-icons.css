@@ -1,0 +1,102 @@
+/* Trust-Sektion – Farben, Karten und Icon-Animationen.
+   Alle Farben kommen aus den Theme-Tokens (--foreground, --muted-foreground, --card,
+   --background, --border, --accent). Transparenz über color-mix(), damit es mit
+   Hex-Tokens funktioniert. Ausgelöst wird alles über .trust-card:hover. */
+
+/* Akzentfarbe: die EINZIGE Stelle, an der sie festgelegt wird. */
+.trust-card { --ti-accent: var(--accent); }
+
+/* Überschrift */
+.trust-head h2 { color: var(--foreground); }
+.trust-head p  { color: var(--muted-foreground); }
+
+/* Karte */
+.trust-card {
+  border: 1px solid var(--border);
+  border-radius: calc(var(--radius) * 2);
+  background: linear-gradient(170deg, color-mix(in srgb, var(--card) 90%, transparent), color-mix(in srgb, var(--card) 35%, transparent));
+  transition: transform .3s cubic-bezier(.4,0,.2,1), border-color .3s ease, box-shadow .3s ease;
+}
+.trust-card:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--ti-accent) 40%, var(--border));
+  box-shadow: 0 8px 40px color-mix(in srgb, var(--ti-accent) 14%, transparent);
+}
+.trust-card .ti-glow {
+  background: radial-gradient(circle at 2.5rem 50%, color-mix(in srgb, var(--ti-accent) 12%, transparent), transparent 62%);
+  opacity: .55; transition: opacity .5s ease;
+}
+@media (min-width: 640px) {
+  .trust-card .ti-glow { background: radial-gradient(circle at 50% 36%, color-mix(in srgb, var(--ti-accent) 12%, transparent), transparent 62%); }
+}
+.trust-card:hover .ti-glow { opacity: 1; }
+
+/* Textfeld unten in der Karte */
+.trust-card .ti-panel {
+  border: 1px solid color-mix(in srgb, var(--border) 70%, transparent);
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--background) 45%, transparent);
+}
+.trust-card .ti-panel h3 { color: var(--foreground); }
+.trust-card .ti-panel p  { color: var(--muted-foreground); }
+
+/* Icons */
+.ti { overflow: visible; }
+.ti * { transform-box: view-box; }
+.ti .l  { stroke: var(--foreground); }
+.ti .a  { stroke: var(--ti-accent); }
+.ti .fa { fill: var(--ti-accent); }
+.ti .fs { fill: color-mix(in srgb, var(--ti-accent) 14%, transparent); }
+
+/* Bühne: Icon hebt sich */
+.trust-card .ti-wrap { transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+.trust-card:hover .ti-wrap { transform: translateY(-4px) scale(1.08); }
+
+/* Checkout: Bügel rastet ein, Schloss pulsiert, Schlüsselloch leuchtet */
+.trust-card:hover .ti-lock .shackle { animation: ti-click .7s cubic-bezier(.3,0,.2,1) both; }
+.ti-lock .pulse { opacity: 0; transform-origin: 32px 42px; }
+.trust-card:hover .ti-lock .pulse { animation: ti-pulse .8s ease-out .42s both; }
+.ti-lock .key { transition: filter .4s ease .4s; }
+.trust-card:hover .ti-lock .key { filter: drop-shadow(0 0 2.5px var(--ti-accent)); }
+@keyframes ti-click  { 0% { transform: translateY(0); } 35% { transform: translateY(-4.5px); } 62% { transform: translateY(.8px); } 78% { transform: translateY(-.4px); } 100% { transform: translateY(0); } }
+@keyframes ti-pulse  { 0% { opacity: .7; transform: scale(1); } 100% { opacity: 0; transform: scale(1.28); } }
+
+/* Verpackung: Box hebt sich, landet im Polster, Klappen gehen zu, Folie glänzt */
+.trust-card:hover .ti-pack .item { animation: ti-settle .8s cubic-bezier(.3,0,.2,1) both; }
+.ti-pack .b1 { transform-origin: 17px 27.4px; }
+.ti-pack .b2 { transform-origin: 19.4px 23.4px; }
+.ti-pack .b3 { transform-origin: 47px 27.4px; }
+.ti-pack .b4 { transform-origin: 44.6px 23.4px; }
+.trust-card:hover .ti-pack .bubbles circle { animation: ti-squish .45s ease-out .45s both; }
+.ti-pack .flap-l { transform-origin: 12px 30px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+.ti-pack .flap-r { transform-origin: 52px 30px; transition: transform .5s cubic-bezier(.34,1.56,.64,1); }
+.trust-card:hover .ti-pack .flap-l { transform: rotate(40deg); transition-delay: .5s; }
+.trust-card:hover .ti-pack .flap-r { transform: rotate(-40deg); transition-delay: .5s; }
+.ti-pack .shine { opacity: .85; }
+.trust-card:hover .ti-pack .shine { animation: ti-shine .9s ease-in-out .15s; }
+@keyframes ti-settle { 0% { transform: translateY(0); } 30% { transform: translateY(-5px); } 62% { transform: translateY(.8px); } 80% { transform: translateY(-.3px); } 100% { transform: translateY(0); } }
+@keyframes ti-squish { 0%,100% { transform: scale(1); } 40% { transform: scale(1.25); } }
+@keyframes ti-shine  { 0% { transform: translateX(-4px); opacity: 0; } 30% { opacity: 1; } 100% { transform: translateX(7px); opacity: 0; } }
+
+/* Lieferung: Fahrtwind, drehende Räder, Blitz flackert */
+.ti-truck .drive { transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
+.trust-card:hover .ti-truck .drive { transform: translateX(3px); }
+.trust-card:hover .ti-truck .rumble { animation: ti-rumble .28s ease-in-out .15s infinite alternate; }
+.ti-truck .w1 { transform-origin: 20px 41px; }
+.ti-truck .w2 { transform-origin: 49px 41px; }
+.trust-card:hover .ti-truck .w1,
+.trust-card:hover .ti-truck .w2 { animation: ti-spin .45s linear infinite; }
+.ti-truck .speed path { opacity: 0; }
+.trust-card:hover .ti-truck .speed path { animation: ti-streak .75s linear infinite; }
+.trust-card:hover .ti-truck .speed path:nth-child(2) { animation-delay: .25s; }
+.trust-card:hover .ti-truck .speed path:nth-child(3) { animation-delay: .5s; }
+.trust-card:hover .ti-truck .bolt { animation: ti-flash .9s ease-out .1s; }
+@keyframes ti-spin   { to { transform: rotate(360deg); } }
+@keyframes ti-rumble { to { transform: translateY(-.7px); } }
+@keyframes ti-streak { 0% { opacity: 0; transform: translateX(3px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateX(-4px); } }
+@keyframes ti-flash  { 0%,100% { opacity: 1; } 20% { opacity: .3; } 40% { opacity: 1; } 55% { opacity: .5; } 70% { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .trust-card, .trust-card .ti *, .trust-card .ti-wrap { animation: none !important; transition: none !important; }
+  .trust-card:hover, .trust-card:hover .ti-wrap { transform: none; }
+}
