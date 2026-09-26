@@ -81,17 +81,17 @@
 /* Lieferung: Fahrtwind, drehende Räder, Blitz flackert */
 .ti-truck .drive { transition: transform .6s cubic-bezier(.34,1.56,.64,1); }
 .trust-card:hover .ti-truck .drive { transform: translateX(3px); }
-.trust-card:hover .ti-truck .rumble { animation: ti-rumble .28s ease-in-out .15s infinite alternate; }
+.trust-card:hover .ti-truck .rumble { animation: ti-rumble .28s ease-in-out .15s 4 alternate; }
 .ti-truck .w1 { transform-origin: 20px 41px; }
 .ti-truck .w2 { transform-origin: 49px 41px; }
 .trust-card:hover .ti-truck .w1,
-.trust-card:hover .ti-truck .w2 { animation: ti-spin .45s linear infinite; }
+.trust-card:hover .ti-truck .w2 { animation: ti-spin 1.1s cubic-bezier(.3,0,.25,1); }
 .ti-truck .speed path { opacity: 0; }
-.trust-card:hover .ti-truck .speed path { animation: ti-streak .75s linear infinite; }
+.trust-card:hover .ti-truck .speed path { animation: ti-streak .75s linear 2 both; }
 .trust-card:hover .ti-truck .speed path:nth-child(2) { animation-delay: .25s; }
 .trust-card:hover .ti-truck .speed path:nth-child(3) { animation-delay: .5s; }
 .trust-card:hover .ti-truck .bolt { animation: ti-flash .9s ease-out .1s; }
-@keyframes ti-spin   { to { transform: rotate(360deg); } }
+@keyframes ti-spin   { to { transform: rotate(720deg); } }
 @keyframes ti-rumble { to { transform: translateY(-.7px); } }
 @keyframes ti-streak { 0% { opacity: 0; transform: translateX(3px); } 30% { opacity: 1; } 100% { opacity: 0; transform: translateX(-4px); } }
 @keyframes ti-flash  { 0%,100% { opacity: 1; } 20% { opacity: .3; } 40% { opacity: 1; } 55% { opacity: .5; } 70% { opacity: 1; } }

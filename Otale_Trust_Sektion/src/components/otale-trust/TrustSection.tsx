@@ -64,9 +64,9 @@ const promises = [
 
 export default function TrustSection() {
   return (
-    <section aria-labelledby="trust-heading" className="mx-auto w-full max-w-6xl px-4 py-16 md:py-24">
+    <section aria-labelledby="trust-heading" className="mx-auto w-full max-w-6xl px-4 py-10 md:py-16 lg:py-20">
       <div className="trust-head mb-10 text-center md:mb-14">
-        <h2 id="trust-heading" className="text-2xl font-black uppercase tracking-tight md:text-5xl">
+        <h2 id="trust-heading" className="text-2xl md:text-4xl lg:text-5xl font-black tracking-tight uppercase">
           Unser Versprechen
         </h2>
         <p className="mt-3 text-sm md:text-base">Worauf du dich bei Otale verlassen kannst</p>
